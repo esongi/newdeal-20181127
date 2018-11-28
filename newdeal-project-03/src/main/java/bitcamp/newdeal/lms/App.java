@@ -54,6 +54,7 @@ public class App {
       System.out.println("계속하시겠습니까?(Y/n) ");
       String input = keyIn.nextLine();
 
+      // "", y, Y일 경우 break(이하 구문)를 무시하고 다시 반복
       if (input.equals("") || input.equalsIgnoreCase("y")) {
         continue;
       }
@@ -65,5 +66,8 @@ public class App {
       System.out.printf("%d, %s, %s ~ %s, %d\n", no[i], title[i], startDate[i], endDate[i],
           totalHours[i]);
     }
+
+    // 1, 자바 프로젝트 실습 , 2019-01-02 ~ 2019-05-28, 1000
+
   }
 }
