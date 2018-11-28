@@ -15,17 +15,17 @@ public class App {
     // 클래스 메서드. 특정 작업에서 작업하는 것이 아님(static), 보편적으로 사용하는것
     int no = Integer.parseInt(keyIn.nextLine());
 
-    System.out.println("수업명?");
+    System.out.print("수업명?");
     // 인스턴스 메서드. 특정 인스턴스에서만 작업해야 한다
     String title = keyIn.nextLine();
 
-    System.out.println("내용?");
+    System.out.print("내용?");
     String contents = keyIn.nextLine();
 
-    System.out.println("강의시작일?");
+    System.out.print("강의시작일?");
     Date startDate = Date.valueOf(keyIn.nextLine());
 
-    System.out.println("강의종료일?");
+    System.out.print("강의종료일?");
     Date endDate = Date.valueOf(keyIn.nextLine());
 
     System.out.print("총강의시간?");
@@ -36,7 +36,7 @@ public class App {
 
     keyIn.close();
 
-    System.out.println("번호: " + no);
+    System.out.printf("번호: %d\n", no);
     System.out.printf("수업명: %s\n", title); // 문자열 안에 삽입되는 명령어, 이스케이프 문자
     System.out.printf("내용: %s\n", contents);
     System.out.printf("시작일: %s\n", startDate);
