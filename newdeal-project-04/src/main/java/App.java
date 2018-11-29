@@ -5,6 +5,7 @@ public class App {
 
   public static void main(String[] args) {
 
+    // eomcs-java-project-1.5
     Scanner keyboard = new Scanner(System.in);
 
     final int LENGTH = 10;
@@ -15,33 +16,37 @@ public class App {
     // 아직까지 객체 생성한게 아니다! 자리만 있지, 비어있다(널)
     Lesson[] lessons = new Lesson[LENGTH];
 
+    // i는 배열의 인덱스용
     int i = 0;
     while (i < LENGTH) {
 
       // 이게 꼭 필요하다!!!! 인스턴스 생성해서 주소를 저장해야 한다
-      lessons[i] = new Lesson();
+      // lesson = new Lesson();
+      // lesson[i].xxx 대신
+      Lesson lesson = new Lesson();
 
       System.out.print("번호? ");
-      lessons[i].no = Integer.parseInt(keyboard.nextLine());
+      lesson.no = Integer.parseInt(keyboard.nextLine());
 
       System.out.print("수업명? ");
-      lessons[i].title = keyboard.nextLine();
+      lesson.title = keyboard.nextLine();
 
       System.out.print("설명? ");
-      lessons[i].contents = keyboard.nextLine();
+      lesson.contents = keyboard.nextLine();
 
       System.out.print("시작일? ");
-      lessons[i].startDate = Date.valueOf(keyboard.nextLine());
+      lesson.startDate = Date.valueOf(keyboard.nextLine());
 
       System.out.print("종료일? ");
-      lessons[i].endDate = Date.valueOf(keyboard.nextLine());
+      lesson.endDate = Date.valueOf(keyboard.nextLine());
 
       System.out.print("총수업시간? ");
-      lessons[i].totalHours = Integer.parseInt(keyboard.nextLine());
+      lesson.totalHours = Integer.parseInt(keyboard.nextLine());
 
       System.out.print("일수업시간? ");
-      lessons[i].dayHours = Integer.parseInt(keyboard.nextLine());
+      lesson.dayHours = Integer.parseInt(keyboard.nextLine());
 
+      lessons[i] = lesson;
       i++; // 배열의 인덱스를 증가시킨다.
 
       // 사용자가 입력한 값을 소문자로 변환한다.

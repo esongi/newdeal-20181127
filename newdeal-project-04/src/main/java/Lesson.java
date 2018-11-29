@@ -13,4 +13,10 @@ public class Lesson {
   Date endDate;
   int totalHours;
   int dayHours;
+  Date registeredDate;
+  String tel;
+  String name;
+  String email;
+  String photo;
+  String password;
 }
