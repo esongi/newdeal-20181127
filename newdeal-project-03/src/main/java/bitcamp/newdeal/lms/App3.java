@@ -30,7 +30,7 @@ public class App3 {
       registeredDate[i] = new Date(System.currentTimeMillis());
 
       System.out.print("계속 입력하시겠습니까?(Y/n) ");
-      
+
       String input = keyIn.nextLine();
 
       len++;
@@ -40,7 +40,6 @@ public class App3 {
       }
       break;
     }
-
     keyIn.close();
 
     // 1, 게시글입니다. , 2019-01-01, 0
