@@ -7,6 +7,7 @@ import com.eomcs.lms.handler.MemberHandler;
 
 public class App {
 
+  // eomcs-java-project-2.4
   static Scanner keyboard = new Scanner(System.in);
 
   public static void main(String[] args) {
@@ -50,10 +51,8 @@ public class App {
       } else {
         System.out.println("실행할 수 없는 명령입니다.");
       }
-
       System.out.println();
     }
-
     keyboard.close();
   }
 
