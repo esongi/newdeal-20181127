@@ -53,6 +53,7 @@ public class Queue<E> extends LinkedList<E> implements Cloneable {
         return this.count < Queue.this.size();
       }
 
+      @SuppressWarnings("unchecked")
       @Override
       public E next() {
         this.count++;

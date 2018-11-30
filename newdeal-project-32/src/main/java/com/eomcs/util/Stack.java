@@ -52,6 +52,7 @@ public class Stack<E> extends LinkedList<E> implements Cloneable {
         return this.count < Stack.this.size();
       }
 
+      @SuppressWarnings("unchecked")
       @Override
       public E next() {
         this.count++;
