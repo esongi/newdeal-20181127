@@ -1,8 +1,6 @@
 package com.eomcs.lms.handler;
 
-import java.util.List;
 import java.util.Scanner;
-import com.eomcs.lms.domain.Board;
 
 public class HelloCommand implements Command {
 
