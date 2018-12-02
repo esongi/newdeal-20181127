@@ -15,10 +15,10 @@ public class LessonHandler {
     this.list = new ArrayList<>(20);
   }
 
+  // 외부에서 주입받게 하자!
   public void listLesson() {
-    Object[] objs = list.toArray();
-    for (Object obj : objs) {
-      Lesson lesson = (Lesson) obj;
+    Lesson[] lessons = list.toArray(new Lesson[] {});
+    for (Lesson lesson : lessons) {
       System.out.printf("%3d, %-15s, %10s ~ %10s, %4d\n", lesson.getNo(), lesson.getTitle(),
           lesson.getStartDate(), lesson.getEndDate(), lesson.getTotalHours());
     }

@@ -18,11 +18,20 @@ public class ArrayList<T> {
       elementData = new Object[DEFAULT_CAPACITY];
   }
 
-  public Object[] toArray() {
-    return Arrays.copyOf(elementData, size);
+  // T는 오브젝트/?
+  @SuppressWarnings("unchecked")
+  public T[] toArray(T[] a) {
+    if (a.length < size) {
+      return (T[]) Arrays.copyOf(elementData, size, a.getClass());
+    }
+    System.arraycopy(elementData, 0, a, 0, size);
+    if (a.length < size) {
+      a[size] = null;
+    }
+    return a;
   }
 
-  public void add(Object obj) {
+  public void add(T obj) {
     if (size >= elementData.length) {
       int oldCapacity = elementData.length;
       int newCapacity = oldCapacity + (oldCapacity >> 1);
