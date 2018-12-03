@@ -1,45 +1,72 @@
 package com.eomcs.lms.handler;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
-import com.eomcs.lms.domain.Lesson;
+import org.mariadb.jdbc.Driver;
 
 public class LessonDetailCommand implements Command {
 
   Scanner keyboard;
-  List<Lesson> list;
 
-  public LessonDetailCommand(Scanner keyboard, List<Lesson> list) {
+  public LessonDetailCommand(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = list;
-  }
-
-  private int indexOfLesson(int no) {
-    for (int i = 0; i < list.size(); i++) {
-      Lesson l = list.get(i);
-      if (l.getNo() == no)
-        return i;
-    }
-    return -1;
   }
 
   public void execute() {
-    System.out.print("번호? ");
-    int no = Integer.parseInt(keyboard.nextLine());
 
-    int index = indexOfLesson(no);
-    if (index == -1) {
-      System.out.println("해당 수업을 찾을 수 없습니다.");
-      return;
+    Connection con = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+
+    try {
+      System.out.print("번호? ");
+      int no = Integer.parseInt(keyboard.nextLine());
+
+      // MariaDB JDBC 드라이버(java.sql.Driver) 구현체를 로딩
+      DriverManager.registerDriver(new Driver());
+
+      // DBMS에 연결하기
+      con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
+
+      // SQL 전송을 담당할 객체를 준비
+      stmt = con.createStatement();
+
+      // SQL을 서버에 전송 => 서버에서 결과를 가져올 일을 할 객체를 리턴
+      rs = stmt.executeQuery(
+          "select title, cont, sdt, edt, tot_hr, day_hr" + " from lesson" + " where lno = " + no);
+
+      // DBMS에서 한 개의 레코드를 가져온다
+
+      if (rs.next()) {
+        System.out.printf("수업명: %s\n", rs.getString("title"));
+        System.out.printf("설명: %s\n", rs.getString("cont"));
+        System.out.printf("기간: %s ~ %s\n", rs.getDate("sdt"), rs.getDate("edt"));
+        System.out.printf("총수업시간: %d\n", rs.getInt("tot_hr"));
+        System.out.printf("일수업시간: %d\n", rs.getInt("day_hr"));
+      } else {
+        System.out.println("해당 게시글을 찾을 수 없습니다.");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+
+    } finally {
+      try {
+        rs.close();
+      } catch (Exception e) {
+      }
+      try {
+        stmt.close();
+      } catch (Exception e) {
+      }
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
 
-    Lesson lesson = list.get(index);
-
-    System.out.printf("수업명: %s\n", lesson.getTitle());
-    System.out.printf("설명: %s\n", lesson.getContents());
-    System.out.printf("기간: %s ~ %s\n", lesson.getStartDate(), lesson.getEndDate());
-    System.out.printf("총수업시간: %d\n", lesson.getTotalHours());
-    System.out.printf("일수업시간: %d\n", lesson.getDayHours());
   }
 
 }

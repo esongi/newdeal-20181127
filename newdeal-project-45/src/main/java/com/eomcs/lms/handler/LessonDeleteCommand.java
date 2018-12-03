@@ -1,41 +1,49 @@
 package com.eomcs.lms.handler;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.Scanner;
-import com.eomcs.lms.domain.Lesson;
+import org.mariadb.jdbc.Driver;
 
 public class LessonDeleteCommand implements Command {
 
   Scanner keyboard;
-  List<Lesson> list;
 
-  public LessonDeleteCommand(Scanner keyboard, List<Lesson> list) {
+  public LessonDeleteCommand(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = list;
-  }
-
-  private int indexOfLesson(int no) {
-    for (int i = 0; i < list.size(); i++) {
-      Lesson l = list.get(i);
-      if (l.getNo() == no)
-        return i;
-    }
-    return -1;
   }
 
   public void execute() {
-    System.out.print("번호? ");
-    int no = Integer.parseInt(keyboard.nextLine());
 
-    int index = indexOfLesson(no);
-    if (index == -1) {
-      System.out.println("해당 수업을 찾을 수 없습니다.");
-      return;
+    Connection con = null;
+    Statement stmt = null;
+
+    try {
+      DriverManager.registerDriver(new Driver());
+      con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
+      stmt = con.createStatement();
+
+      System.out.print("번호? ");
+      String no = keyboard.nextLine();
+
+      stmt.executeUpdate("delete from lesson where lno=" + no);
+
+      System.out.println("수업을 삭제했습니다");
+
+    } catch (Exception e) {
+      e.printStackTrace();
+
+    } finally {
+      try {
+        stmt.close();
+      } catch (Exception e) {
+      }
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
 
-    list.remove(index);
-
-    System.out.println("수업을 삭제했습니다.");
   }
-
 }

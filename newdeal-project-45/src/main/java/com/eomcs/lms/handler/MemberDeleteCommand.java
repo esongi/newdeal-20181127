@@ -1,41 +1,49 @@
 package com.eomcs.lms.handler;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.Scanner;
-import com.eomcs.lms.domain.Member;
+import org.mariadb.jdbc.Driver;
 
 public class MemberDeleteCommand implements Command {
 
   Scanner keyboard;
-  List<Member> list;
 
-  public MemberDeleteCommand(Scanner keyboard, List<Member> list) {
+  public MemberDeleteCommand(Scanner keyboard) {
     this.keyboard = keyboard;
-    this.list = list;
-  }
-
-  private int indexOfMember(int no) {
-    for (int i = 0; i < list.size(); i++) {
-      Member m = list.get(i);
-      if (m.getNo() == no)
-        return i;
-    }
-    return -1;
   }
 
   public void execute() {
-    System.out.print("번호? ");
-    int no = Integer.parseInt(keyboard.nextLine());
 
-    int index = indexOfMember(no);
-    if (index == -1) {
-      System.out.println("해당 회원을 찾을 수 없습니다.");
-      return;
+    Connection con = null;
+    Statement stmt = null;
+
+    try {
+      DriverManager.registerDriver(new Driver());
+      con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
+      stmt = con.createStatement();
+
+      System.out.print("번호? ");
+      String no = keyboard.nextLine();
+
+      stmt.executeUpdate("delete from member where mno=" + no);
+
+      System.out.println("회원을 삭제했습니다");
+
+    } catch (Exception e) {
+      e.printStackTrace();
+
+    } finally {
+      try {
+        stmt.close();
+      } catch (Exception e) {
+      }
+      try {
+        con.close();
+      } catch (Exception e) {
+      }
     }
-
-    list.remove(index);
-
-    System.out.println("회원을 삭제했습니다.");
   }
 
 }

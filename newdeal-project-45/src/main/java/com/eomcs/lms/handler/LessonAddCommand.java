@@ -1,6 +1,7 @@
 package com.eomcs.lms.handler;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -31,10 +32,10 @@ public class LessonAddCommand implements Command {
       String content = keyboard.nextLine();
 
       System.out.print("시작날짜? ");
-      String startDate = keyboard.nextLine();
+      Date startDate = Date.valueOf(keyboard.nextLine());
 
       System.out.print("종료날짜? ");
-      String endDate = keyboard.nextLine();
+      Date endDate = Date.valueOf(keyboard.nextLine());
 
       System.out.print("회원번호? ");
       String memberNo = keyboard.nextLine();
@@ -50,7 +51,7 @@ public class LessonAddCommand implements Command {
       stmt = con.createStatement();
 
       stmt.executeUpdate("insert into lesson(LNO,TITLE,CONT,SDT,EDT,MNO,TOT_HR,DAY_HR)" + " values("
-          + lessonNo + ",'" + title + "','" + content + "'," + startDate + "," + endDate + ","
+          + lessonNo + ",'" + title + "','" + content + "','" + startDate + "','" + endDate + "',"
           + memberNo + "," + totalHour + "," + dayHour + ")");
       // DBMS에서 한 개의 레코드를 가져온다
 
