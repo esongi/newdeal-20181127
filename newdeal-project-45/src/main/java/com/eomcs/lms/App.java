@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
-import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.handler.BoardAddCommand;
 import com.eomcs.lms.handler.BoardDeleteCommand;
@@ -15,12 +14,8 @@ import com.eomcs.lms.handler.BoardDetailCommand;
 import com.eomcs.lms.handler.BoardListCommand;
 import com.eomcs.lms.handler.BoardUpdateCommand;
 import com.eomcs.lms.handler.Command;
-import com.eomcs.lms.handler.HelloCommand;
 import com.eomcs.lms.handler.LessonAddCommand;
-import com.eomcs.lms.handler.LessonDeleteCommand;
-import com.eomcs.lms.handler.LessonDetailCommand;
 import com.eomcs.lms.handler.LessonListCommand;
-import com.eomcs.lms.handler.LessonUpdateCommand;
 import com.eomcs.lms.handler.MemberAddCommand;
 import com.eomcs.lms.handler.MemberDeleteCommand;
 import com.eomcs.lms.handler.MemberDetailCommand;
@@ -28,14 +23,13 @@ import com.eomcs.lms.handler.MemberListCommand;
 import com.eomcs.lms.handler.MemberUpdateCommand;
 
 public class App {
-  // v3.4, v3.5, v3.6
+  // 4.5
   static Scanner keyboard = new Scanner(System.in);
   static Stack<String> commandHistory = new Stack<>();
   static Queue<String> commandHistory2 = new LinkedList<>();
 
   public static void main(String[] args) {
 
-    ArrayList<Lesson> lessons = new ArrayList<>();
     ArrayList<Member> members = new ArrayList<>();
 
     HashMap<String, Command> commandMap = new HashMap<>();
@@ -45,11 +39,11 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateCommand(keyboard));
     commandMap.put("/board/delete", new BoardDeleteCommand(keyboard));
 
-    commandMap.put("/lesson/list", new LessonListCommand(keyboard, lessons));
-    commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard, lessons));
-    commandMap.put("/lesson/add", new LessonAddCommand(keyboard, lessons));
-    commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard, lessons));
-    commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard, lessons));
+    commandMap.put("/lesson/list", new LessonListCommand(keyboard));
+    // commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard));
+    commandMap.put("/lesson/add", new LessonAddCommand(keyboard));
+    // commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard));
+    // commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard));
 
     commandMap.put("/member/list", new MemberListCommand(keyboard, members));
     commandMap.put("/member/detail", new MemberDetailCommand(keyboard, members));
@@ -57,7 +51,6 @@ public class App {
     commandMap.put("/member/update", new MemberUpdateCommand(keyboard, members));
     commandMap.put("/member/delete", new MemberDeleteCommand(keyboard, members));
 
-    commandMap.put("/hello", new HelloCommand(keyboard));
 
     while (true) {
       String command = prompt();

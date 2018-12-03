@@ -38,7 +38,7 @@ public class LessonUpdateCommand implements Command {
 
     try {
       // 일단 기존 값을 복제한다.
-      Lesson temp = lesson.clone();
+      //Lesson temp = lesson.clone();
 
       System.out.printf("수업명(%s)? ", lesson.getTitle());
       String input = keyboard.nextLine();
