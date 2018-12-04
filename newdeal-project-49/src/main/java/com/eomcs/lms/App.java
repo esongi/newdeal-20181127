@@ -11,8 +11,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.eomcs.lms.dao.BoardDao;
+import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.dao.impl.MariaDBBoardDao;
+import com.eomcs.lms.dao.impl.MariaDBLessonDao;
 import com.eomcs.lms.dao.impl.MariaDBMemberDao;
 import com.eomcs.lms.handler.BoardAddCommand;
 import com.eomcs.lms.handler.BoardDeleteCommand;
@@ -48,6 +50,7 @@ public class App {
     // 고객에 따라 여기서 변경만 하면 적용. 인터페이스의 소중함! 교체하기 쉬움
     BoardDao boardDao = new MariaDBBoardDao(sqlSessionFactory);
     MemberDao memberDao = new MariaDBMemberDao(sqlSessionFactory);
+    LessonDao lessonDao = new MariaDBLessonDao(sqlSessionFactory);
 
     HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -57,17 +60,17 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateCommand(keyboard, boardDao));
     commandMap.put("/board/delete", new BoardDeleteCommand(keyboard, boardDao));
 
-    commandMap.put("/lesson/list", new LessonListCommand(keyboard));
-    commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard));
-    commandMap.put("/lesson/add", new LessonAddCommand(keyboard));
+    commandMap.put("/lesson/list", new LessonListCommand(keyboard, lessonDao));
+    commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard, lessonDao));
+    commandMap.put("/lesson/add", new LessonAddCommand(keyboard, lessonDao));
     commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard));
     commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard));
 
-    commandMap.put("/member/list", new MemberListCommand(keyboard));
-    commandMap.put("/member/detail", new MemberDetailCommand(keyboard));
-    commandMap.put("/member/add", new MemberAddCommand(keyboard));
-    commandMap.put("/member/update", new MemberUpdateCommand(keyboard));
-    commandMap.put("/member/delete", new MemberDeleteCommand(keyboard));
+    commandMap.put("/member/list", new MemberListCommand(keyboard, memberDao));
+    commandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberDao));
+    commandMap.put("/member/add", new MemberAddCommand(keyboard, memberDao));
+    commandMap.put("/member/update", new MemberUpdateCommand(keyboard, memberDao));
+    commandMap.put("/member/delete", new MemberDeleteCommand(keyboard, memberDao));
 
     commandMap.put("/auth/login", new LoginCommand(keyboard, memberDao));
 

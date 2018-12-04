@@ -11,6 +11,7 @@ public class Lesson {
   private int totalHours;
   private int dayHours;
   private int boardNo;
+  private int memberNo;
 
   public int getNo() {
     return no;
@@ -75,4 +76,13 @@ public class Lesson {
   public void setBoardNo(int boardNo) {
     this.boardNo = boardNo;
   }
+
+  public int getMemberNo() {
+    return memberNo;
+  }
+
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
+  }
+  
 }

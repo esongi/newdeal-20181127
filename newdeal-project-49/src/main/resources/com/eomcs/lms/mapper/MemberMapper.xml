@@ -25,6 +25,46 @@
 		where email=#{email} and pwd=#{password}
 	</select>
 
+	<select id="findAll" resultMap="memberMap">
+		select
+			mno,
+			name,
+			email,
+			tel,
+			cdt
+		from member
+	</select>
 	
+	<select id="findByNo" resultMap="memberMap"  parameterType="int">
+		select
+			name,
+			email,
+			pwd,
+			photo,
+			tel,
+			cdt 
+			from member 
+		where mno = #{value}
+	</select>
 	
+	<insert id="insert" parameterType="member">
+		insert into member(mno, name, email, pwd)
+		values(#{no},#{name},#{email},#{password})
+	</insert>
+	
+	<update id="update" parameterType="member">
+		update member set
+			name=#{name},
+			email=#{email},
+			pwd=#{password},
+			photo=#{photo},
+			tel=#{tel}
+		where mno=#{no}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	  delete from member
+	  where mno=#{no}
+	</delete>
+  
 </mapper>

@@ -44,7 +44,7 @@
 	
 	<update id="update" parameterType="board">
 		update board set
-		 cont=#{contents}
+		  cont=#{contents}
 		where bno=#{no}
 	</update>
 	

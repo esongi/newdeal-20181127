@@ -1,6 +1,7 @@
 package com.eomcs.lms.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import com.eomcs.lms.dao.MemberDao;
@@ -24,5 +25,46 @@ public class MariaDBMemberDao implements MemberDao {
       return sqlSession.selectOne("MemberDao.findByEmailPassword", params);
     }
   }
+
+  @Override
+  public List<Member> findAll() throws Exception {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+      return sqlSession.selectList("MemberDao.findAll");
+    }
+  }
+
+  @Override
+  public Member findByNo(int no) throws Exception {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+      return sqlSession.selectOne("MemberDao.findByNo", no);
+    }
+  }
+
+  @Override
+  public int insert(Member member) throws Exception {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+      int count = sqlSession.insert("MemberDao.insert", member);
+      sqlSession.commit();
+      return count;
+    }
+  }
+
+  public int update(Member member) throws Exception {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+      int count = sqlSession.update("MemberDao.update", member);
+      sqlSession.commit();
+      return count;
+    }
+  }
+
+  @Override
+  public int delete(int no) throws Exception {
+
+    try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+      int count = sqlSession.delete("MemberDao.delete", no);
+      sqlSession.commit();
+      return count;
+    }
+ }
 
 }

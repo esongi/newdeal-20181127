@@ -1,75 +1,53 @@
 package com.eomcs.lms.handler;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.Arrays;
 import java.util.Scanner;
-import org.mariadb.jdbc.Driver;
+import com.eomcs.lms.dao.MemberDao;
+import com.eomcs.lms.domain.Member;
 
 public class MemberUpdateCommand implements Command {
 
   Scanner keyboard;
+  MemberDao memberDao;
 
-  public MemberUpdateCommand(Scanner keyboard) {
+  public MemberUpdateCommand(Scanner keyboard, MemberDao memberDao) {
     this.keyboard = keyboard;
+    this.memberDao = memberDao;
   }
 
   public void execute() {
 
-    Connection con = null;
-    Statement stmt = null;
-
     try {
-      DriverManager.registerDriver(new Driver());
-      con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
-      stmt = con.createStatement();
 
       System.out.print("번호? ");
-      String no = keyboard.nextLine();
+      int no = Integer.parseInt(keyboard.nextLine());
 
-      ResultSet rs = stmt.executeQuery("select * from member where mno=" + no);
-      rs.next();
+      Member member = memberDao.findByNo(no);
 
-      String oldName = rs.getString("name");
-      String oldEmail = rs.getString("email");
-      String oldPwd = rs.getString("pwd");
-      String oldPhoto = rs.getString("photo");
-      String oldTel = rs.getString("tel");
-      rs.close();
+      System.out.printf("이름(%s)? ", member.getName());
+      member.setName(keyboard.nextLine());
 
-      System.out.printf("이름(%s)? ", oldName);
-      String name = keyboard.nextLine();
+      System.out.printf("이메일(%s)? ", member.getEmail());
+      member.setEmail(keyboard.nextLine());
 
-      System.out.printf("이메일(%s)? ", oldEmail);
-      String email = keyboard.nextLine();
+      System.out.printf("암호(%s)? ", member.getPassword());
+      member.setPassword(keyboard.nextLine());
 
-      System.out.printf("암호(%s)? ", oldPwd);
-      String pwd = keyboard.nextLine();
+      System.out.printf("사진(%s)? ", member.getPhoto());
+      member.setPhoto(keyboard.nextLine());
 
-      System.out.printf("사진(%s)? ", oldPhoto);
-      String photo = keyboard.nextLine();
+      System.out.printf("전화번호(%s)? ", member.getTel());
+      member.setTel(keyboard.nextLine());
 
-      System.out.printf("전화번호(%s)? ", oldTel);
-      String tel = keyboard.nextLine();
-
-      // sql을 서버에 전송
-      stmt.executeUpdate("update member set name='" + name + "', email='" + email + "', pwd='" + pwd
-          + "', photo='" + photo + "', tel='" + tel + "' where mno=" + no);
+      memberDao.update(member);
+      
+      System.out.println(member);
+      
+      
       System.out.println("변경했습니다");
     } catch (Exception e) {
       e.printStackTrace();
 
-    } finally {
-      try {
-        stmt.close();
-      } catch (Exception e) {
-      }
-      try {
-        con.close();
-      } catch (Exception e) {
-      }
     }
   }
-
 }

@@ -1,75 +1,57 @@
 package com.eomcs.lms.handler;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.Scanner;
-import org.mariadb.jdbc.Driver;
+import com.eomcs.lms.dao.LessonDao;
+import com.eomcs.lms.domain.Lesson;
 
 public class LessonAddCommand implements Command {
 
   Scanner keyboard;
+  LessonDao lessonDao;
 
-  public LessonAddCommand(Scanner keyboard) {
+  public LessonAddCommand(Scanner keyboard, LessonDao lessonDao) {
     this.keyboard = keyboard;
+    this.lessonDao = lessonDao;
   }
 
   public void execute() {
 
-    Connection con = null;
-    Statement stmt = null;
-
     try {
 
+      Lesson lesson = new Lesson();
+
       System.out.print("강의번호? ");
-      String lessonNo = keyboard.nextLine();
+      lesson.setNo(Integer.parseInt(keyboard.nextLine()));
 
       System.out.print("제목? ");
-      String title = keyboard.nextLine();
+      lesson.setTitle(keyboard.nextLine());
 
       System.out.print("내용? ");
-      String content = keyboard.nextLine();
+      lesson.setContents(keyboard.nextLine());
 
       System.out.print("시작날짜? ");
-      Date startDate = Date.valueOf(keyboard.nextLine());
+      lesson.setStartDate(Date.valueOf(keyboard.nextLine()));
 
       System.out.print("종료날짜? ");
-      Date endDate = Date.valueOf(keyboard.nextLine());
+      lesson.setEndDate(Date.valueOf(keyboard.nextLine()));
 
       System.out.print("회원번호? ");
-      String memberNo = keyboard.nextLine();
+      lesson.setMemberNo(Integer.parseInt(keyboard.nextLine()));
 
-      System.out.println("총수업시간?");
-      String totalHour = keyboard.nextLine();
+      System.out.print("총수업시간?");
+      lesson.setTotalHours(Integer.parseInt(keyboard.nextLine()));
 
       System.out.print("하루수업시간? ");
-      String dayHour = keyboard.nextLine();
+      lesson.setDayHours(Integer.parseInt(keyboard.nextLine()));
 
-      DriverManager.registerDriver(new Driver());
-      con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
-      stmt = con.createStatement();
-
-      stmt.executeUpdate("insert into lesson(LNO,TITLE,CONT,SDT,EDT,MNO,TOT_HR,DAY_HR)" + " values("
-          + lessonNo + ",'" + title + "','" + content + "','" + startDate + "','" + endDate + "',"
-          + memberNo + "," + totalHour + "," + dayHour + ")");
-      // DBMS에서 한 개의 레코드를 가져온다
+      lessonDao.insert(lesson);
 
       System.out.println("입력했습니다");
     } catch (Exception e) {
       e.printStackTrace();
 
-    } finally {
-      try {
-        stmt.close();
-      } catch (Exception e) {
-      }
-      try {
-        con.close();
-      } catch (Exception e) {
-      }
     }
-
   }
 
 }
