@@ -51,6 +51,7 @@ public class MariaDBBoardDao implements BoardDao {
         PreparedStatement stmt = con
             .prepareStatement("select bno, cont, cdt, view, mno, lno from board where bno =?");) {
 
+      
       // DBMS에서 한 개의 레코드를 가져온다
       stmt.setInt(1, no);
 
