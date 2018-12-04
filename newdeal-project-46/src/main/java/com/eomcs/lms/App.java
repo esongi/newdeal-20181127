@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 import com.eomcs.lms.dao.BoardDao;
+import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.handler.BoardAddCommand;
 import com.eomcs.lms.handler.BoardDeleteCommand;
 import com.eomcs.lms.handler.BoardDetailCommand;
@@ -33,6 +34,7 @@ public class App {
   public static void main(String[] args) {
 
     BoardDao boardDao = new BoardDao();
+    LessonDao lessonDao = new LessonDao();
 
     HashMap<String, Command> commandMap = new HashMap<>();
     commandMap.put("/board/list", new BoardListCommand(keyboard, boardDao));
@@ -41,8 +43,8 @@ public class App {
     commandMap.put("/board/update", new BoardUpdateCommand(keyboard, boardDao));
     commandMap.put("/board/delete", new BoardDeleteCommand(keyboard, boardDao));
 
-    commandMap.put("/lesson/list", new LessonListCommand(keyboard));
-    commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard));
+    commandMap.put("/lesson/list", new LessonListCommand(keyboard, lessonDao));
+    commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard, lessonDao));
     commandMap.put("/lesson/add", new LessonAddCommand(keyboard));
     commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard));
     commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard));
