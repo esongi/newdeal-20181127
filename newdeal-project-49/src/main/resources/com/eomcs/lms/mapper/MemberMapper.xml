@@ -37,6 +37,7 @@
 	
 	<select id="findByNo" resultMap="memberMap"  parameterType="int">
 		select
+		  mno,
 			name,
 			email,
 			pwd,
@@ -44,7 +45,7 @@
 			tel,
 			cdt 
 			from member 
-		where mno = #{value}
+		where mno = #{no}
 	</select>
 	
 	<insert id="insert" parameterType="member">

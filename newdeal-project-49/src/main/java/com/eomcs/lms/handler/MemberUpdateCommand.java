@@ -40,8 +40,6 @@ public class MemberUpdateCommand implements Command {
 
       memberDao.update(member);
 
-      System.out.println(member);
-
 
       System.out.println("변경했습니다");
     } catch (Exception e) {

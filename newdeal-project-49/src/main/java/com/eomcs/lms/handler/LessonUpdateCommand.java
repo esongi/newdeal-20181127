@@ -42,8 +42,10 @@ public class LessonUpdateCommand implements Command {
       System.out.printf("일수업시간(%s)? ", lesson.getDayHours());
       lesson.setDayHours(Integer.parseInt(keyboard.nextLine()));
 
-      lessonDao.update(lesson);
-      System.out.println("변경했습니다");
+      if (lessonDao.update(lesson) > 0)
+        System.out.println("변경했습니다");
+      else
+        System.out.println("해당 수업을 찾을 수 없습니다!");
     } catch (Exception e) {
       e.printStackTrace();
 

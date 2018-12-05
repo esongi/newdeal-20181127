@@ -23,7 +23,7 @@ public class MemberDao {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select bno, cont, cdt, view from board");) {
 
-      List<Board> list = new ArrayList<>();
+      List<Member> list = new ArrayList<>();
       while (rs.next()) {
         // 데이터를 담을 인스턴스
         Board board = new Board();
@@ -32,7 +32,7 @@ public class MemberDao {
         board.setCreatedDate(rs.getDate("cdt"));
         board.setViewCount(rs.getInt("view"));
 
-        list.add(board);
+       // list.add(board);
       }
       return list;
 
