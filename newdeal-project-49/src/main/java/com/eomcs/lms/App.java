@@ -63,8 +63,8 @@ public class App {
     commandMap.put("/lesson/list", new LessonListCommand(keyboard, lessonDao));
     commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard, lessonDao));
     commandMap.put("/lesson/add", new LessonAddCommand(keyboard, lessonDao));
-    commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard));
-    commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard));
+    commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard, lessonDao));
+    commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard, lessonDao));
 
     commandMap.put("/member/list", new MemberListCommand(keyboard, memberDao));
     commandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberDao));

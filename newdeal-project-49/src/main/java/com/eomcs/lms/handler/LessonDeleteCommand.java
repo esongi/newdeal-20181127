@@ -5,45 +5,32 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Scanner;
 import org.mariadb.jdbc.Driver;
+import com.eomcs.lms.dao.LessonDao;
 
 public class LessonDeleteCommand implements Command {
 
   Scanner keyboard;
+  LessonDao lessonDao;
 
-  public LessonDeleteCommand(Scanner keyboard) {
+  public LessonDeleteCommand(Scanner keyboard, LessonDao lessonDao) {
+    this.lessonDao = lessonDao;
     this.keyboard = keyboard;
   }
 
   public void execute() {
 
-    Connection con = null;
-    Statement stmt = null;
-
     try {
-      DriverManager.registerDriver(new Driver());
-      con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/studydb", "study", "1111");
-      stmt = con.createStatement();
 
       System.out.print("번호? ");
-      String no = keyboard.nextLine();
+      int no = Integer.parseInt(keyboard.nextLine());
 
-      stmt.executeUpdate("delete from lesson where lno=" + no);
+      lessonDao.delete(no);
 
       System.out.println("수업을 삭제했습니다");
 
     } catch (Exception e) {
       e.printStackTrace();
 
-    } finally {
-      try {
-        stmt.close();
-      } catch (Exception e) {
-      }
-      try {
-        con.close();
-      } catch (Exception e) {
-      }
     }
-
   }
 }

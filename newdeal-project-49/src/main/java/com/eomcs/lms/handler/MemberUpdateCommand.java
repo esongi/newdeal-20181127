@@ -1,6 +1,5 @@
 package com.eomcs.lms.handler;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
@@ -40,10 +39,10 @@ public class MemberUpdateCommand implements Command {
       member.setTel(keyboard.nextLine());
 
       memberDao.update(member);
-      
+
       System.out.println(member);
-      
-      
+
+
       System.out.println("변경했습니다");
     } catch (Exception e) {
       e.printStackTrace();

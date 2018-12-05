@@ -40,21 +40,25 @@
 	</select>
     
 	<insert id="insert" parameterType="lesson">
-    insert into lesson(lno, titles, cont, sdt, edt, mno, tot_hr, day_hr)
+    insert into lesson(lno, title, cont, sdt, edt, mno, tot_hr, day_hr)
     values(#{no}, #{title}, #{contents}, #{startDate}, #{endDate},
      #{memberNo}, #{totalHours}, #{dayHours})
   </insert>
-	
   
 	<update id="update" parameterType="lesson">
 		update lesson set
-		  cont=#{contents}
-		where bno=#{no}
+		  title=#{title},
+		  cont=#{contents},
+		  sdt=#{startDate},
+		  edt=#{endDate},
+		  tot_hr=#{totalHours},
+		  day_hr=#{dayHours}
+		where lno=#{no}
 	</update>
 	
 	<delete id="delete" parameterType="int">
 		delete from lesson
-		where bno=#{no}
+		where lno=#{no}
 	</delete>
 	
 </mapper>
