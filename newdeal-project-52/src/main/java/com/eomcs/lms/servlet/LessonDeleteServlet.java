@@ -1,20 +1,17 @@
-package com.eomcs.lms.handler;
+package com.eomcs.lms.servlet;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.Scanner;
-import org.mariadb.jdbc.Driver;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.dao.LessonDao;
+import com.eomcs.lms.handler.Command;
 
 @Component("/lesson/delete")
-public class LessonDeleteCommand implements Command {
+public class LessonDeleteServlet implements Command {
 
   Scanner keyboard;
   LessonDao lessonDao;
 
-  public LessonDeleteCommand(Scanner keyboard, LessonDao lessonDao) {
+  public LessonDeleteServlet(Scanner keyboard, LessonDao lessonDao) {
     this.lessonDao = lessonDao;
     this.keyboard = keyboard;
   }

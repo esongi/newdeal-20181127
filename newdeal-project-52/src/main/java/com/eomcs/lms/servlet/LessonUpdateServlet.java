@@ -1,18 +1,19 @@
-package com.eomcs.lms.handler;
+package com.eomcs.lms.servlet;
 
 import java.sql.Date;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
+import com.eomcs.lms.handler.Command;
 
 @Component("/lesson/update")
-public class LessonUpdateCommand implements Command {
+public class LessonUpdateServlet implements Command {
 
   Scanner keyboard;
   LessonDao lessonDao;
 
-  public LessonUpdateCommand(Scanner keyboard, LessonDao lessonDao) {
+  public LessonUpdateServlet(Scanner keyboard, LessonDao lessonDao) {
     this.lessonDao = lessonDao;
     this.keyboard = keyboard;
   }

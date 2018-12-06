@@ -1,18 +1,19 @@
-package com.eomcs.lms.handler;
+package com.eomcs.lms.servlet;
 
 import java.util.List;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.lms.handler.Command;
 
 @Component("/member/list")
-public class MemberListCommand implements Command {
+public class MemberListServlet implements Command {
 
   Scanner keyboard;
   MemberDao memberDao;
 
-  public MemberListCommand(Scanner keyboard, MemberDao memberDao) {
+  public MemberListServlet(Scanner keyboard, MemberDao memberDao) {
     this.keyboard = keyboard;
     this.memberDao = memberDao;
   }

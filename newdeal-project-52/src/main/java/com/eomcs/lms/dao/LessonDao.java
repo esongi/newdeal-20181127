@@ -1,9 +1,12 @@
 package com.eomcs.lms.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.eomcs.lms.domain.Lesson;
 
 public interface LessonDao {
+
+  List<Map<String, Object>> findByParticipantNo(int memberNo) throws Exception;
 
   List<Lesson> findAll() throws Exception;
 

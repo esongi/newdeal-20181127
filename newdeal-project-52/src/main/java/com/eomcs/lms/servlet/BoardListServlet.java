@@ -1,8 +1,8 @@
 package com.eomcs.lms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,9 +22,6 @@ import com.eomcs.lms.domain.Board;
 @WebServlet("/board/list")
 public class BoardListServlet extends HttpServlet {
 
-  /**
-   * 
-   */
   private static final long serialVersionUID = 1L;
   BoardDao boardDao;
 
@@ -38,33 +35,38 @@ public class BoardListServlet extends HttpServlet {
 
     try {
       boardDao = iocContainer.getBean(BoardDao.class);
+
     } catch (Exception e) {
-      // TODO: handle exception
+      e.printStackTrace();
+      throw new ServletException();
     }
   }
 
   @Override
-  public void doGet(HttpServletRequest req, HttpServletResponse res)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     // BoardDao 객체를 꺼내기 위해 먼저 IoC 컨테이너를 꺼낸다
     // 웹 어플리케이션(현:newdeal-project-52) 하나당 서블릿컨텍스트 하나가 있다
-    // 웹 어플리케이션 하나당
-    res.setContentType("text/plain;charset=UTF-8");
-    PrintWriter out = res.getWriter();
-    out.println("게시물 목록");
+    // MIME Type
+    // Multi-purpose Mail Extension
 
     try {
       List<Board> list = boardDao.findAll();
 
-      for (Board board : list) {
-        // 데이터를 담을 인스턴스
-        out.printf("%3d, %-20s, %s, %d\n", board.getNo(), board.getContents(),
-            board.getCreatedDate(), board.getViewCount());
-      }
+      // 게시물을 목록을 jsp가 사용할 수 있또록 보관소 저장
+      request.setAttribute("list", list);
+
+      // jsp로 실행을 위임
+      RequestDispatcher rd = request.getRequestDispatcher("/board/list.jsp");
+
+      // 출력 콘텐트의 타입을 include 하는 쪽에서 지정해야 한다
+      response.setContentType("text/html;charset=UTF-8");
+      rd.include(request, response); // forward는 안돌아오고, include는 돌아옴
+
     } catch (Exception e) {
       e.printStackTrace();
+      throw new ServletException(); // 웹에 던져줌
     }
-
   }
 }

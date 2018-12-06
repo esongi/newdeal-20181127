@@ -34,6 +34,10 @@ dependencies {
     // servlet-api 서블릿 어플리케이션 개발
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     
+    // jstl 라이브러리
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
+    
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
 }

@@ -1,17 +1,18 @@
-package com.eomcs.lms.handler;
+package com.eomcs.lms.servlet;
 
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.lms.handler.Command;
 
 @Component("/member/add")
-public class MemberAddCommand implements Command {
+public class MemberAddServlet implements Command {
 
   Scanner keyboard;
   MemberDao memberDao;
 
-  public MemberAddCommand(Scanner keyboard, MemberDao memberDao) {
+  public MemberAddServlet(Scanner keyboard, MemberDao memberDao) {
     this.memberDao = memberDao;
     this.keyboard = keyboard;
   }

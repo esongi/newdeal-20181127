@@ -10,8 +10,8 @@ public class Lesson {
   private Date endDate;
   private int totalHours;
   private int dayHours;
+  private int ownerNo;
   private int boardNo;
-  private int memberNo;
 
   public int getNo() {
     return no;
@@ -77,12 +77,12 @@ public class Lesson {
     this.boardNo = boardNo;
   }
 
-  public int getMemberNo() {
-    return memberNo;
+  public int getOwnerNo() {
+    return ownerNo;
   }
 
-  public void setMemberNo(int memberNo) {
-    this.memberNo = memberNo;
+  public void setOwnerNo(int ownerNo) {
+    this.ownerNo = ownerNo;
   }
-  
+
 }

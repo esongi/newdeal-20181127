@@ -1,17 +1,18 @@
-package com.eomcs.lms.handler;
+package com.eomcs.lms.servlet;
 
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
+import com.eomcs.lms.handler.Command;
 
 @Component("/lesson/detail")
-public class LessonDetailCommand implements Command {
+public class LessonDetailServlet implements Command {
 
   Scanner keyboard;
   LessonDao lessonDao;
 
-  public LessonDetailCommand(Scanner keyboard, LessonDao lessonDao) {
+  public LessonDetailServlet(Scanner keyboard, LessonDao lessonDao) {
     this.keyboard = keyboard;
     this.lessonDao = lessonDao;
   }

@@ -1,16 +1,17 @@
-package com.eomcs.lms.handler;
+package com.eomcs.lms.servlet;
 
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.dao.MemberDao;
+import com.eomcs.lms.handler.Command;
 
 @Component("/member/delete")
-public class MemberDeleteCommand implements Command {
+public class MemberDeleteServlet implements Command {
 
   Scanner keyboard;
   MemberDao memberDao;
 
-  public MemberDeleteCommand(Scanner keyboard, MemberDao memberDao) {
+  public MemberDeleteServlet(Scanner keyboard, MemberDao memberDao) {
     this.keyboard = keyboard;
     this.memberDao = memberDao;
   }
