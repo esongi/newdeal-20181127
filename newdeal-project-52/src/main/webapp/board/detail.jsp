@@ -24,19 +24,19 @@
 			</tr>
 			<tr>
 				<th>작성일</th>
-				<td><input type="text" readonly value="${board.createdDate}"></td>
+				<td>${board.createdDate}</td>
 			</tr>
 			<tr>
 				<th>조회수</th>
-				<td><input type="text" readonly value="${board.viewCount}"></td>
+				<td>${board.viewCount}</td>
 			</tr>
 			<tr>
-				<th>작성자번호</th>
-				<td><input type="text" readonly value="${board.writerNo}"></td>
+				<th>작성자</th>
+				<td>${board.writer.name}</td>
 			</tr>
 			<tr>
-				<th>수업번호</th>
-				<td><input type="text" readonly value="${board.lessonNo}"></td>
+				<th>수업명</th>
+				<td>${board.lesson.title}</td>
 			</tr>
 
 			<tr>

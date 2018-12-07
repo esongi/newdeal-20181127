@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="LessonDao">
+<mapper namespace="com.eomcs.lms.dao.LessonDao">
 
   <resultMap type="lesson" id="lessonMap">
   <!-- primary key는 id로 설정 -->
@@ -28,7 +28,6 @@
 	</select>
 
 	<select id="findByParticipantNo" resultType="hashmap" parameterType="int">
-		
 		select 
 		  lm.mno memberNo,
 		  l.lno lessonNo,
@@ -36,7 +35,6 @@
 		from les_memb lm
 		  join lesson l on lm.lno=l.lno
 		where lm.mno=#{value}
-		
 	</select>
     
 	<insert id="insert" parameterType="lesson">
