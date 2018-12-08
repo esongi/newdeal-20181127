@@ -4,7 +4,7 @@
 
 ### 추가설명
 
-#### Settings.gradle
+#### file)Settings.gradle
 ~~~
 plugins {
     id 'java'
