@@ -2,7 +2,9 @@
 
 ## 01 : Maven 기본 자바 프로젝트 폴더 준비
 
-#### Settings.gradle 
+### 추가설명
+
+#### Settings.gradle
 ~~~
 plugins {
     id 'java'
