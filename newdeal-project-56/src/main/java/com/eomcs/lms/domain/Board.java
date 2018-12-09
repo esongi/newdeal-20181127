@@ -59,7 +59,5 @@ public class Board {
   public void setWriter(Member writer) {
     this.writer = writer;
   }
-
-  
   
 }

@@ -1,7 +1,7 @@
 package com.eomcs.lms.domain;
 import java.sql.Date;
 
-public class Lesson implements Cloneable {
+public class Lesson {
   private int no;
   private String title;
   private String contents;
@@ -10,11 +10,6 @@ public class Lesson implements Cloneable {
   private int totalHours;
   private int dayHours;
   private int ownerNo;
-  
-  @Override
-  public Lesson clone() throws CloneNotSupportedException {
-    return (Lesson) super.clone();
-  }
   
   public int getNo() {
     return no;
@@ -66,6 +61,5 @@ public class Lesson implements Cloneable {
   public void setOwnerNo(int ownerNo) {
     this.ownerNo = ownerNo;
   }
-  
   
 }

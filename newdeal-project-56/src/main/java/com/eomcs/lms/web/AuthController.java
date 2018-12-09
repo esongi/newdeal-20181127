@@ -36,8 +36,8 @@ public class AuthController {
   }
 
   @RequestMapping("form")
-  public String form() throws Exception {
-    return "auth/form";
+  public void form() throws Exception {
+   // return "auth/form";
   }
 
   @RequestMapping("logout")
