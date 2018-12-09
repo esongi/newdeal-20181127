@@ -2,6 +2,7 @@
 
 ## 02 : 리터럴(literal), 변수(variables), 키보드 입력 사용
 
+### 추가설명
 ~~~
 Scanner keyIn = new Scanner(System.in);
 // 키보드로 받을 때! (웹에서는 스캐너 안쓰임, 자바스크립트 input으로 받음)
