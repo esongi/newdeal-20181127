@@ -122,9 +122,45 @@
 3, 세 번째 게시글입니다.        , 2019-01-01, 0
 ```
 
-
 ## 실습 소스
 
 - src/main/java/App.java 변경
 - src/main/java/App2.java 변경
 - src/main/java/App3.java 변경
+
+## 추가 설명
+
+**.gitignore**
+~~~
+.gitignore : 서버에서 Github로 자료가 전송될 때, 전송되지 않길 희망하는 일부 파일(캐시파일 등)에 대해 자동으로 업로드되지 않게 한다
+
+.settings/
+bin/
+// xxx/ 이하 폴더는 git에 올리지 않는다
+
+.project
+*.class
+// .확장자명 인 파일은 git에 올리지 않는다
+~~~
+
+**App**
+~~~
+// new 로 만들었기에 heap에 생긴다
+// 주소를 저장하는 래퍼런스 변수
+// 객체 = 일반적, 인스턴스 = 콕 찝어서
+// 아직까지 객체 생성한게 아니다! 자리만 있지, 비어있다(널)
+Lesson[] lessons = new Lesson[LENGTH];
+
+// 인스턴스 생성해서 주소를 저장해야 한다
+Lesson lesson = new Lesson();
+
+// 사용자가 입력한 값을 소문자로 변환한다.(대문자:toUpperCase)
+String answer = keyIn.nextLine().toLowerCase();
+
+// 3칸 안에, 15칸 안에(마이너스 정렬), 10칸 안에(양:오른쪽)
+System.out.printf("%3d, %-15s, %10s", lessons[j].no, lessons[j].title, lessons[j].startDate);
+
+// 인스턴스 필드(데이터를 개별적으로 다루어야 한다)
+// static 필드(클래스 필드: 하나의 데이터로 공유한다)
+~~~
+
